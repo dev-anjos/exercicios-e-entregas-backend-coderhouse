@@ -26,6 +26,7 @@
             stock
         };
 
+
         this.products.push(newProduct);
         // console.log(this.products);
     

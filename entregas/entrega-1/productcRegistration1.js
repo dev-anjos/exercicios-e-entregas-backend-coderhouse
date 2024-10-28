@@ -15,21 +15,21 @@ function searchProduct(code) {
   
 
 // Exemplo de uso:
-receberProdutos({
-  title: 'Banana',
-  description: 'Banana',
-  price: 10.0,
-  thumbnail: 'imagemA.png',
-  code: '001',
-  stock: 10
-});
+// receberProdutos({
+//   title: 'Banana',
+//   description: 'Banana',
+//   price: 10.0,
+//   thumbnail: 'imagemA.png',
+//   code: '001',
+//   stock: 10
+// });
 
 receberProdutos({
-    title: 'Laranja',
-    description: 'Laranja',
+    title: 'uva',
+    description: 'uva',
     price: 12.0,
     thumbnail: 'imagemB.png',
-    code: '002',
+    code: '003',
     stock: 15
 });
 

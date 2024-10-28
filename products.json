@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "title": "Banana",
+    "description": "Banana",
+    "price": 10,
+    "thumbnail": "imagemA.png",
+    "code": "001",
+    "stock": 10
+  },
+  {
+    "id": 2,
+    "title": "limao",
+    "description": "limao",
+    "price": 12,
+    "thumbnail": "imagemB.png",
+    "code": "003",
+    "stock": 15
+  },
+  {
+    "id": 3,
+    "title": "maca",
+    "description": "limacamao",
+    "price": 12,
+    "thumbnail": "imagemB.png",
+    "code": "006",
+    "stock": 15
+  }
+]
