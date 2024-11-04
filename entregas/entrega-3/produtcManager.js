@@ -1,5 +1,7 @@
  
 const fs = require('fs');
+const { parse } = require('path');
+
 
 class ProductManager {
   constructor() {
@@ -10,16 +12,16 @@ class ProductManager {
 
     // Método privado para leitura do arquivo
     #readFile() {
-        try {
-        const fileContent = fs.readFileSync(this.path, "utf-8");
-        return fileContent ? JSON.parse(fileContent) : []; // Retorna array vazio se o arquivo estiver vazio
-        } catch (err) {
-        console.error("Erro ao ler o arquivo:", err);
-        return [];
-        }
+      try {
+      const fileContent = fs.readFileSync(this.path, "utf-8");
+      return fileContent ? JSON.parse(fileContent) : []; // Retorna array vazio se o arquivo estiver vazio
+      } catch (err) {
+      console.error("Erro ao ler o arquivo:", err);
+      return [];
+      }
     }
 
-        // Método privado para escrita no arquivo
+    // Método privado para escrita no arquivo
     #writeFile(data) {
         try {
         const jsonData = JSON.stringify(data, null, 2);
@@ -31,9 +33,9 @@ class ProductManager {
     }
 
     addProduct({ title, description, price, thumbnail, code, stock }) {
-        if (!title || !description || !price || !thumbnail || !code || !stock) {
+      if (!title || !description || !price || !thumbnail || !code || !stock){
         throw new Error("Todos os campos são obrigatórios.");
-        }
+      }
 
     try {
       const existingProducts = this.#readFile();
@@ -63,14 +65,20 @@ class ProductManager {
       
       this.#writeFile(existingProducts)
       console.log('Produtos salvos com sucesso!');
-    } catch (err) {
+    }catch (err) {
       console.error('Erro ao salvar os produtos:', err);
     }
   }
 
   getProductById(id) {
     const existingProducts = this.#readFile();
-    const product = existingProducts.find((product) => product.id === id);
+    const productId = parseInt(id);
+    if (id == 0)  {
+      console.log("Achou o zero")
+    }
+
+    const product = existingProducts.find((product) => product.id == productId);
+
 
     if (!product) {
       throw new Error("Produto não encontrado.");
@@ -78,9 +86,9 @@ class ProductManager {
     return product;
   }
 
-  getProducts(){
-    const products = this.#readFile();
-    return JSON.stringify(products, null, 2);   
+  async getProducts (){
+    const products = await this.#readFile();
+    return products   
   }
 
   updateProduct(id, updatedProduct) {
@@ -111,29 +119,31 @@ class ProductManager {
   }
 };
 
-const productManager = new ProductManager('products.json');
+module.exports = ProductManager
 
-// lista de produtos
-console.log(`Lista completa de produtos: ${productManager.getProducts()}`);
+// const productManager = new ProductManager('products.json');
 
-// adiciona um novo produto
-productManager.addProduct({
-    title: 'cenoura',
-    description: 'cenoura',
-    price: 10.0,
-    thumbnail: 'imagemA.png',
-    code: '010',
-    stock: 10
-});
+// // lista de produtos
+// console.log(`Lista completa de produtos: ${productManager.getProducts()}`);
 
-// busca por id
-console.log(`Produto por id: ${JSON.stringify(productManager.getProductById(3))}`);
+// // adiciona um novo produto
+// productManager.addProduct({
+//     title: 'cenoura',
+//     description: 'cenoura',
+//     price: 10.0,
+//     thumbnail: 'imagemA.png',
+//     code: '010',
+//     stock: 10
+// });
 
-// atualiza o preço
-productManager.updateProduct(3, { price: 10000.0});
+// // busca por id
+// console.log(`Produto por id: ${JSON.stringify(productManager.getProductById(3))}`);
 
-// deleta o produto
-productManager.deleteProduct(4);
+// // atualiza o preço
+// productManager.updateProduct(3, { price: 10000.0});
 
-console.log(`Lista completa de produtos após deletar o 4: ${productManager.getProducts()}`);
+// // deleta o produto
+// productManager.deleteProduct(4);
+
+// console.log(`Lista completa de produtos após deletar o 4: ${productManager.getProducts()}`);
 
