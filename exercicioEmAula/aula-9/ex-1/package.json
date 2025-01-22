@@ -1,16 +1,17 @@
 {
-  "name": "curso-node",
+  "name": "ex-1",
   "version": "1.0.0",
-  "main": "exercicioEmAula/aula-6/server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
     "express": "^4.21.1",
-    "nodemon": "^3.1.7"
+    "express-handlebars": "^8.0.1",
+    "handlebars": "^4.7.8"
   }
 }
